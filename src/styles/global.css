@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  :root {
+    --white: #ffffff;
+    --orange: #ff823f;
+    --dark-blue: rgb(18, 16, 35);
+    --yellow: rgb(255, 194, 26);
+    --blue: rgb(32, 45, 172);
+    --gray: #4f5665;
+    --black: #323232;
+  }
+  
+  body,
+  input,
+  textarea,
+  button {
+    font: 500 1rem Arial;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+    color: var(--gray);
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h5 {
+    font-size: 1.3rem;
+  }
+  
+  button {
+    cursor: pointer;
+  }
+
+  a {
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  a:hover {
+    color: var(--blue)
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
