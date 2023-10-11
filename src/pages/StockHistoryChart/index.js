@@ -3,11 +3,10 @@ import { StockHistoryChartContainer } from "./StockHistoryChart.styles";
 import Chart from "../../components/Chart";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { FaArrowAltCircleUp, FaArrowAltCircleDown } from "react-icons/fa";
 
 import {
   Box,
-  CircularProgress,
-  Container,
   Paper,
   Stack,
   Table,
@@ -31,6 +30,8 @@ function formatDate(inputDate) {
   const date = new Date(inputDate);
   return date.toLocaleDateString("en-US", options);
 }
+
+const headers = ["Date", "Change", "Status"];
 
 function extractHoursAndSeconds(dateString) {
   // Parse the date string into a JavaScript Date object
@@ -113,7 +114,7 @@ export default function StockHistoryChart() {
               </Typography>
               <Box>
                 <h3 style={{ color: "var(--dark-blue)" }}>
-                  Lower - R${stockDetails.lower_bound} - Upper R$
+                  Lower Bound R${stockDetails.lower_bound} / Upper Bound R$
                   {stockDetails.upper_bound}
                 </h3>
               </Box>
@@ -161,12 +162,25 @@ export default function StockHistoryChart() {
 
       {stockHistory && stockHistory.length ? (
         <>
-          <TableContainer style={{ gridArea: "table" }} component={Paper}>
+          <TableContainer
+            style={{ gridArea: "table", padding: "5rem" }}
+            component={Paper}
+          >
+            <Typography
+              variant="h5"
+              component="h5"
+              sx={{ color: "var(--dark-blue)", fontWeight: "600", mb: 3 }}
+            >
+              Changes History
+            </Typography>
             <Table>
-              <TableHead>
+              <TableHead sx={{ backgroundColor: "rgb(32 45 172 / 83%)" }}>
                 <TableRow>
-                  <TableCell align="left">Date</TableCell>
-                  <TableCell align="left">Change</TableCell>
+                  {headers.map((header, idx) => (
+                    <TableCell align="left" sx={{ color: "whitesmoke" }}>
+                      <b>{header.toUpperCase()}</b>
+                    </TableCell>
+                  ))}
                 </TableRow>
               </TableHead>
 
@@ -178,6 +192,13 @@ export default function StockHistoryChart() {
                     </TableCell>
                     <TableCell component="th" scope="row">
                       {row.change}
+                    </TableCell>
+                    <TableCell>
+                      {row.change > 0 ? (
+                        <FaArrowAltCircleUp color="green" />
+                      ) : (
+                        <FaArrowAltCircleDown  color="red"  />
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}
