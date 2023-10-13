@@ -1,13 +1,12 @@
 import React, { createContext, useState, useEffect } from "react";
 
 const Context = createContext();
+const TOKEN_KEY = "@investIQszA-token";
 
 function AuthProvider({ children }) {
-  const [authenticated, setAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [authenticated, setAuthenticated] = useState(localStorage.getItem(TOKEN_KEY) ? true : false);
 
   //token key. the way our token is identified in localstorage
-  const TOKEN_KEY = "@investIQszA-token";
 
   useEffect(() => {
     //get token to send it in the header for next requests.
@@ -15,8 +14,6 @@ function AuthProvider({ children }) {
 
     if (token) setAuthenticated(true);
 
-    //render components after verifying if there's a token and creating handleAuth
-    setLoading(false);
   }, []);
 
   async function handleAuth(token) {

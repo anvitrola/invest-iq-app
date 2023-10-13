@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import logo from "../../assets/images/Logo.png";
 
@@ -10,16 +10,23 @@ import FlexContainer from "../FlexContainer";
 
 export default function Topbar() {
   const { authenticated, handleLogout } = useContext(Context);
+  const [logoRoute, setLogoRoute] = useState("/home");
   const navigate = useNavigate();
+
+  console.log(logoRoute);
 
   async function logout() {
     handleLogout();
   }
 
+  useEffect(() => {
+    if (authenticated) setLogoRoute("/");
+  }, [authenticated]);
+
   return (
     <TopbarContainer>
       <Box>
-        <Link to={authenticated ? "/" : "/home"}>
+        <Link to={logoRoute}>
           <Logo>
             <img
               src={logo}
@@ -52,7 +59,7 @@ export default function Topbar() {
             variant="outlined"
             sx={{ mr: 1 }}
             onClick={() => {
-              !authenticated && navigate("/register");
+              authenticated ? navigate("/") : navigate("/register");
             }}
           >
             {authenticated ? "Portfolio" : " Sign Up"}
