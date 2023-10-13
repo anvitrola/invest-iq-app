@@ -31,7 +31,7 @@ function formatDate(inputDate) {
   return date.toLocaleDateString("en-US", options);
 }
 
-const headers = ["Date", "Change", "Status"];
+const headers = ["Date", "Close", "Change", "Status"];
 
 function extractHoursAndSeconds(dateString) {
   // Parse the date string into a JavaScript Date object
@@ -133,9 +133,8 @@ export default function StockHistoryChart() {
 
               <Box>
                 <Stack spacing={1}>
-                  <h4>Close R${stockDetails.close}</h4>
-                  <h4>Change R${stockDetails.change}</h4>
-
+                  <h4>Close {stockDetails.close} BRL</h4>
+                  <h4>Change of {stockDetails.change} BRL</h4>
                   <h4>Volume {stockDetails.volume}</h4>
                 </Stack>
               </Box>
@@ -166,13 +165,21 @@ export default function StockHistoryChart() {
             style={{ gridArea: "table", padding: "5rem" }}
             component={Paper}
           >
-            <Typography
-              variant="h5"
-              component="h5"
-              sx={{ color: "var(--dark-blue)", fontWeight: "600", mb: 3 }}
-            >
-              Changes History
-            </Typography>
+            <Stack spacing={2} sx={{ mb: 4 }}>
+              <Typography
+                variant="h5"
+                component="h5"
+                sx={{ color: "var(--dark-blue)", fontWeight: "600" }}
+              >
+                Stock Price History
+              </Typography>
+              <h4 style={{ color: "var(--gray)" }}>
+                Our Comprehensive Record of Stock Price Changes, Old Prices,
+                Shifts, and Timestamps: Providing Clarity on Market Fluctuations
+                for Informed Decision-Making
+              </h4>
+            </Stack>
+
             <Table>
               <TableHead sx={{ backgroundColor: "rgb(32 45 172 / 83%)" }}>
                 <TableRow>
@@ -191,13 +198,16 @@ export default function StockHistoryChart() {
                       {row.date}
                     </TableCell>
                     <TableCell component="th" scope="row">
+                      {row.close}
+                    </TableCell>
+                    <TableCell component="th" scope="row">
                       {row.change}
                     </TableCell>
                     <TableCell>
                       {row.change > 0 ? (
                         <FaArrowAltCircleUp color="green" />
                       ) : (
-                        <FaArrowAltCircleDown  color="red"  />
+                        <FaArrowAltCircleDown color="red" />
                       )}
                     </TableCell>
                   </TableRow>
