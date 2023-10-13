@@ -192,8 +192,8 @@ export default function StockHistoryChart() {
               </TableHead>
 
               <TableBody>
-                {stockHistory.map((row) => (
-                  <TableRow>
+                {stockHistory.map((row, index) => (
+                  <TableRow key={index}>
                     <TableCell component="th" scope="row">
                       {row.date}
                     </TableCell>
