@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, Suspense } from "react";
 import "./styles/global.css";
 
 import { AppBody } from "./styles/App.styles.js";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Context } from "./contexts/AuthContext";
 import { privateRoutes, publicRoutes } from "./routes";
+import Loader from "./components/Loader/Loader";
 
 function App() {
   const { authenticated } = useContext(Context);
@@ -16,7 +17,9 @@ function App() {
 
   return (
     <AppBody className="App">
-      <RouterProvider router={router} />
+      <Suspense fallback={<Loader />}>
+        <RouterProvider router={router} />
+      </Suspense>
     </AppBody>
   );
 }
