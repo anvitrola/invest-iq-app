@@ -171,20 +171,24 @@ export default function StockHistoryChart() {
                 component="h5"
                 sx={{ color: "var(--dark-blue)", fontWeight: "600" }}
               >
-                Stock Price History
+                STOCK PRICE HISTORY
               </Typography>
-              <h4 style={{ color: "var(--gray)" }}>
+              <Typography
+                variant="h6"
+                component="h6"
+                sx={{ color: "var(--gray)" }}
+              >
                 Our Comprehensive Record of Stock Price Changes, Old Prices,
                 Shifts, and Timestamps: Providing Clarity on Market Fluctuations
                 for Informed Decision-Making
-              </h4>
+              </Typography>
             </Stack>
 
             <Table>
               <TableHead sx={{ backgroundColor: "rgb(32 45 172 / 83%)" }}>
                 <TableRow>
                   {headers.map((header, idx) => (
-                    <TableCell align="left" sx={{ color: "whitesmoke" }}>
+                    <TableCell key={idx} align="left" sx={{ color: "whitesmoke" }}>
                       <b>{header.toUpperCase()}</b>
                     </TableCell>
                   ))}

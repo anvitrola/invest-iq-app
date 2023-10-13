@@ -84,7 +84,7 @@ export default function StockTable({ refreshStockList, setRefreshStockList }) {
         <Typography
           variant="h6"
           component="h6"
-          sx={{ color: "var(--dark-blue)" }}
+          sx={{ color: "var(--gray)" }}
         >
           {monitoredStocksList.length} stocks monitored
         </Typography>
