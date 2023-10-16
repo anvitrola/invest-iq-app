@@ -15,6 +15,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import FlexContainer from "../FlexContainer";
+import { formatDate } from "../../helpers/formatDate";
 
 const headers = [
   "Stock (Ticker)",
@@ -24,6 +25,7 @@ const headers = [
   "Lower Bound",
   "Upper Bound",
   "Close",
+  "Last Update At"
 ];
 
 export default function StockTable({ refreshStockList, setRefreshStockList }) {
@@ -81,11 +83,7 @@ export default function StockTable({ refreshStockList, setRefreshStockList }) {
         >
           PORTFOLIO
         </Typography>
-        <Typography
-          variant="h6"
-          component="h6"
-          sx={{ color: "var(--gray)" }}
-        >
+        <Typography variant="h6" component="h6" sx={{ color: "var(--gray)" }}>
           {monitoredStocksList.length} stocks monitored
         </Typography>
       </Stack>
@@ -127,10 +125,13 @@ export default function StockTable({ refreshStockList, setRefreshStockList }) {
                   </TableCell>
 
                   <TableCell align="left">{row.volume}</TableCell>
-                  <TableCell align="left">{row.change}</TableCell>
-                  <TableCell align="left">{row.lower_bound}</TableCell>
-                  <TableCell align="left">{row.upper_bound}</TableCell>
-                  <TableCell align="left">{row.close}</TableCell>
+                  <TableCell align="left">R$ {row.change}</TableCell>
+                  <TableCell align="left">R$ {row.lower_bound}</TableCell>
+                  <TableCell align="left">R$ {row.upper_bound}</TableCell>
+                  <TableCell align="left">
+                    <b>R${row.close}</b>
+                  </TableCell>
+                  <TableCell align="left">{formatDate(row.updated_at)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
