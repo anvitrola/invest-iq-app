@@ -28,8 +28,9 @@
 
 <div align="center">
    <img width="1424" alt="Screen Shot 2023-10-10 at 22 58 28" src="https://github.com/anvitrola/invest-iq-app/assets/62806299/3cad92f6-c952-46fb-a8db-80dffbdb799a">
-  <img width="1439" alt="Screen Shot 2023-10-10 at 23 05 05" src="https://github.com/anvitrola/invest-iq-app/assets/62806299/9fbf5adc-2845-4fb8-ad9f-2f9481f2a750">
-
+<img width="1440" alt="Screen Shot 2023-10-16 at 12 08 37" src="https://github.com/anvitrola/invest-iq-app/assets/62806299/aa527d1f-10f8-4b94-80b1-8b6100ef8933">
+<img width="1438" alt="Screen Shot 2023-10-16 at 12 10 46" src="https://github.com/anvitrola/invest-iq-app/assets/62806299/1155ebdb-9be8-4cd6-a982-0dc9f58d5114">
+<img width="1440" alt="Screen Shot 2023-10-16 at 12 10 34" src="https://github.com/anvitrola/invest-iq-app/assets/62806299/bc3161a4-ca4a-4692-9bbb-887817e53e60">
 
 </div>
 
@@ -54,11 +55,17 @@
 ### 🚀 Running the Project
 
 1. Clone this repository
-   ```bash
-   git clone https://github.com/anvitrola/invest-iq-app.git
+   `git clone https://github.com/anvitrola/invest-iq-app.git`
+   
+2. Get the public API key on https://brapi.dev/
 
-2. The application will start on http://localhost:3000
+3. Run NPM init to install node packages
+   ` npm install`
 
+4. Run NPM start to start application
+   ` npm start`
+
+The application will start on http://localhost:3000
 <p>You can find the API here -> <a href="https://github.com/anvitrola/invest-iq-api">here</a>. 🌸</p>
 
 
