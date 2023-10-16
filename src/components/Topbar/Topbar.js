@@ -13,8 +13,6 @@ export default function Topbar() {
   const [logoRoute, setLogoRoute] = useState("/home");
   const navigate = useNavigate();
 
-  console.log(logoRoute);
-
   async function logout() {
     handleLogout();
   }
