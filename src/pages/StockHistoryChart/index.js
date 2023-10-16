@@ -19,36 +19,9 @@ import {
 } from "@mui/material";
 import FlexContainer from "../../components/FlexContainer";
 import Loader from "../../components/Loader/Loader";
-
-function formatDate(inputDate) {
-  const options = {
-    month: "short",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-  };
-  const date = new Date(inputDate);
-  return date.toLocaleDateString("en-US", options);
-}
+import { formatDate } from "../../helpers/formatDate";
 
 const headers = ["Date", "Close", "Change", "Status"];
-
-function extractHoursAndSeconds(dateString) {
-  // Parse the date string into a JavaScript Date object
-  const date = new Date(dateString);
-
-  // Extract the hours and seconds
-  const hours = date.getHours();
-  const seconds = date.getSeconds();
-
-  // Format the extracted values as a string
-  const formattedTime =
-    hours.toString().padStart(2, "0") +
-    ":" +
-    seconds.toString().padStart(2, "0");
-
-  return formattedTime;
-}
 
 export default function StockHistoryChart() {
   const { ticker } = useParams();
@@ -77,7 +50,14 @@ export default function StockHistoryChart() {
         )
       );
 
-      if (stockHistoryResponse.data) setStockHistory(stockHistoryResponse.data);
+      if (stockHistoryResponse.data) {
+        const data = stockHistoryResponse.data.map((stock) => ({
+          ...stock,
+          date: formatDate(stock.date),
+        }));
+
+        setStockHistory(data);
+      }
 
       if (stockDetailsResponse.data) setStockDetails(stockDetailsResponse.data);
 
@@ -128,14 +108,18 @@ export default function StockHistoryChart() {
               spacing={3}
             >
               <h2>
-                <b>{stockDetails.name}</b>
+                <b>
+                  <i>
+                    <u>{stockDetails.name}</u>
+                  </i>
+                </b>
               </h2>
 
               <Box>
                 <Stack spacing={1}>
                   <h4>Close {stockDetails.close} BRL</h4>
                   <h4>Change of {stockDetails.change} BRL</h4>
-                  <h4>Volume {stockDetails.volume}</h4>
+                  <h4>Volume {stockDetails.volume} stocks</h4>
                 </Stack>
               </Box>
 
@@ -153,7 +137,7 @@ export default function StockHistoryChart() {
             : [
                 {
                   change: stockDetails.change,
-                  date: extractHoursAndSeconds(stockDetails.updated_at),
+                  date: formatDate(stockDetails.updated_at),
                 },
               ]
         }
@@ -188,7 +172,11 @@ export default function StockHistoryChart() {
               <TableHead sx={{ backgroundColor: "rgb(32 45 172 / 83%)" }}>
                 <TableRow>
                   {headers.map((header, idx) => (
-                    <TableCell key={idx} align="left" sx={{ color: "whitesmoke" }}>
+                    <TableCell
+                      key={idx}
+                      align="left"
+                      sx={{ color: "whitesmoke" }}
+                    >
                       <b>{header.toUpperCase()}</b>
                     </TableCell>
                   ))}
@@ -202,10 +190,10 @@ export default function StockHistoryChart() {
                       {row.date}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {row.close}
+                      R$ {row.close}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {row.change}
+                      R$ {row.change}
                     </TableCell>
                     <TableCell>
                       {row.change > 0 ? (
